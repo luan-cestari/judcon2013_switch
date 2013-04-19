@@ -75,154 +75,493 @@
 							Are you a boy or a girl? 
 						</p>
 						<img  src="images/02_pokemon.png" alt="Doctor Oak from pokemon" class="fragment roll-in"/>
-						<aside class="notes">
-							-Who knows anything?
-							-Who tested some product of FuseESB?
-							-Who works with FuseESB
-						</aside>
 					</section>
 					<section>
 						<h2>Agenda</h2>
 						<ul>
 							<li>History</li>
-							<li>What is FuseESB</li>
-							<li>Enterprise Integration Patterns</li>
-							<li>Solutions</li>
+							<li>SOA</li>
+							<li>Switchyard</li>
+							<li>Examples</li>
 						</ul>
 					</section>
 					<section>
 						<h2>Key points</h2>
 						<ul>
-							<li class="fragment highlight-red">Business/Job Opportunities</li>
-							<li class="fragment highlight-green">Architecture</li>
-							<li class="fragment highlight-blue">Technologies</li>
+							<li class="fragment highlight-red">SOA</li>
 						</ul>
-						<aside class="notes">
-							It is like Big Data Key points but I'll focus in these subjects
-						</aside>
 					</section>
 				</section>
 
 				<section>
 					<section>
-						<h2>What's Big Data</h2>
-						<img src="images/03_big.jpg"/>
+						<h2>History</h2>
+						<p class="fragment roll-in">
+							A long time ago in a galaxy far, far away....
+						</p>
+						<aside class="notes">
+							In 60/70s, there was almost only IBM mainframes that didn't communicate
+							To exchange information, they used the tapes from one system to another, in other words, it was very very slow!
+							Over the time, the real time and communication between system emerges and became a necessity
+							First the communication was very very complex, without even a standard. After some (hard) time finally, the first protocols were created (like FTP and NFS). This was the beginning of everything. After that, companies could finally create the first "distributed" programs that could use RPC to run process remotely.
+							The 80's was the personal computer era. An the 90's is the internet era, before the communication over the internet was too much expensive.
+							In January 2000 SOAP was created (alternative from CORBA and DCOM) 
+							In 2003 Gatner created the term SOA
+							The Apache Axis, first JAX-WS open source born in 2004
+
+						</aside>
 					</section>
 					<section>
-						<h2>What's Big Data</h2>
-						<p>4 Vs</p>
+						<h2>Without SOA</h2>
+						<img src="images/03_without_soa.png"/>
+					</section>
+					<section>
+						<h2>With SOA</h2>
+						<img src="images/04_with_soa.png"/>
+					</section>
+					<section>
+						<h2>SOA</h2>
+						<img src="images/05_soa.png" class="fragment roll-in"/>
+						<aside class="notes">
+							SOA=IT strategy=Organized Components with interoperable, standard-based that can be quickly combined, reused and changed, QoS, federated, discovable
+							The objetive is to eliminate the huge amount of redudant software (that have costs for maintaining and changing), to a much more simple and automating solution that increases the produtivity
+							Can handle an bussines process (the diagram to view and to manager the different services and systems involved) and monitor in real time the enterprise (CEP) -> EDA (event driven architecture) also called SOA 2.0
+
+						</aside>
+					</section>
+					<section>
+						<h2>SOA Overview</h2>
+						<p>Service Contract</p>
+						<p>Transparency and loose couple</p>
+						<p>Registry</p>
+						<p>BPM</p>
+						<p>Enterprise Decision Management</p>
+						<p>...</p>
+						<aside class="notes">
+							WSDL (SOAP) and WADL (RESTful services)
+						</aside>
+					</section>
+					<section>
+						<h2>SOA Maturity</h2>
+						<img src="images/06_soa_maturity.png"/>
+					</section>
+					<section>
+						<h2>SOA</h2>
+						<p>Organization for the Advancement of Structured Information Standards (OASIS)</p>
 						<ul>
-							<li>Volume</li>
-							<li>Variety</li>
-							<li>Velocity</li>
-							<li>Value</li>
+							<li>Service Data Objects (SDO)</li>
+							<li>Service Component Architecture (SCA)</li>
+						</ul>
+						<aside class="notes">
+							OASIS= not the band ;) = 1993/1998 = Red Hat is one of the Sponsors
+							Others specs: AMQP, UDDI, OpenDocument, WS-BEL
+							SCA and SDO = programming model to support SOA
+							SCA = 2007 (verson 1.0, there was other version previuosly
+							SDO = 2004 ~ JAXB = Data could be represented as SDO to SCA consumes it = EclipseLink support it = JSR235 2009
+							SCA ~ Java Business Integration (JBI) = http://en.wikipedia.org/wiki/Service_Component_Architecture#cite_note-7
+							SCA = Please do not confuse SCA with Spring
+							Plus= Talk about CORBA, about it tried to create SCA but failled, it was to complex and not portable and not very good performance, etc
+						</aside>
+					</section>
+					<section>
+						<h2>SOA</h2>
+						<p>SCA</p>
+						<ul>
+							<li>Loose Coupling</li>
+							<li>Flexibility</li>
+							<li>Services Syn and Async</li>
+							<li>Composition of solutions</li>
+							<li>Productivity</li>
+							<li>Heterogeneity</li>
+							<li>Declarative</li>
+							<li>Simplification</li>
+						</ul>
+						<aside class="notes">
+							source OASIS:
+							Loose Coupling: components integrate without need to know how others are implemented
+							Flexibility: components can easily be replaced by other components
+							Services can be easily invoked either synchronously or asynchronously 
+							Composition of solutions: clearly described
+							Productivity: easier to integrate components to form composite application
+							Heterogeneity: multiple implementation languages, communication mechanisms
+							Declarative application of infrastructure services
+							Simplification for all developers, integrators and application deployers
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>What is Switchyard?</h2>
+						<ul>
+							<li>JBoss next generation Enterprise Service Bus (ESB)</li>
+							<li>The successor of the JBoss ESB project</li>
+							<li>Focus on consistent, intuitive user experience</li>
+							<li>Leverage standards and complimentary technologies</li>
 						</ul>
 					</section>
 					<section>
-						<h2>Whats size of Big Data?</h2>
-						<p>What is the size of daily job from Facebook? 100 GB 10000GB 100000GB?</p>
-						<aside class="notes">
-							Answer:????????????????????????
-						</aside>
-					</section>
-					<section>
-						<h2>Where does the data come from?</h2>
-						<ul class="column" style="width=55%">
-							<li>Customer generated Content</li>
-							<li>M2M</li>
-							<li>Sensors</li>
+						<h2>Project History</h2>
+						<ul>
+							<li>First Milestone was released at February 2011</li>
+							<li>Latest one is 0.8.0.Final) was released at 24 Mar, 2013</li>
 						</ul>
-						<ul class="column" style="float:right; width: 39%">
-							<li>B2B</li>
-							<li>B2C</li>
+					</section>
+					<section>
+						<h2>Service Oriented Integration</h2>
+						<img src="images/service-oriented-integration.png" />
+					</section>
+					<section>
+						<h2>What is in SwitchYard</h2>
+						<img src="images/switchyard-architecture.png">
+					</section>
+					<section>
+						<h2>Configuration Model</h2>
+						<ul>
+							<li>Every switchyard application needs it, it is named switchyard.xml in the META-INF folder</li>
+							<li>It defines the service implementations, gateways, transformations etc.</li>
+							<li>The elements in switchyard.xml conform to Service Component Architecture (<a href="http://docs.oasis-open.org/opencsa/sca-assembly/sca-assembly-spec-v1.1.html">SCA</a>) Assembly Model Specfication</li>
 						</ul>
-						<aside class="notes">
-							Social Network
-							Consumer Devices:smartphones, Setbox (tv a cabo), Netflix, Supermercados/Compras, Cameras de segurança 
-						</aside>
 					</section>
 					<section>
-						<h2>Why so much data?</h2>
+						<h2>Implementation Component</h2>
+						<ul>
+							<li>Bean Service: based on Weld Project</li>
+							<li>Camel Service: based on Apache Camel Project</li>
+							<li>BPM Service: based on jBPM5 Project</li>
+							<li>Rules Service: based on Drools Project</li>
+							<li>BPEL Service: based on RiftSaw Project</li>
+						</ul>
 					</section>
 					<section>
-						<h2>Unstructured data x Structured data</h2>
-						<aside class="notes">
-							* Unstructured information might have some structure (semi-structured) or even be highly structured but in ways that are unanticipated or unannounced. The information are typically text-heavy, but may contain data such as dates, numbers, and facts
-							* Examples of "unstructured data" may include books, journals, documents, metadata, health records, audio, video, analog data, files, and unstructured text such as the body of an e-mail message, Web page, or word-processor document
-
-
-						</aside>
+						<h2>Gateway Component</h2>
+						<ul>
+							<li>SOAP Binding</li>
+							<li>RESTEasy Binding</li>
+							<li>Camel Bindings</li>
+							<ul>
+								<li>file,ftp,ftps,amqp,atom,generic,jms</li>
+								<li>jpa,mail,mock,netty,quartz,seda</li>
+								<li>sftp,sql,timer,direct</li>
+							</ul>
+							<li>HortnetQ Binding</li>
+							<li>JCA Binding</li>
+							<li>HTTP Binding</li>
+						</ul>
 					</section>
+					<section>
+						<h2>Transformers</h2>
+						<ul>
+							<li>Java Transformer</li>
+							<li>Smooks Transformer</li>
+							<li>JSON Transformer</li>
+							<li>XSLT Transformer</li>
+							<li>JAXB Transformer</li>
+						</ul>						
+					</section>
+					<section>
+						<h2>SwitchYard In Action</h2>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
+public interface HelloService {
+	String sayHello(String name);
+}
+							</code>
+						</pre>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
+@Service(HelloService.class)
+public class HelloServiceBean implements HelloService {
+
+	@Override
+	public String sayHello(String name) {
+	System.out.println("Recieved name is: " + name);
+	return "Hello " + name;
+	}
+
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>SwitchYard in Action (2)</h2>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
+@RunWith(SwitchYardRunner.class)
+@SwitchYardTestCaseConfig(mixins = CDIMixIn.class, config = SwitchYardTestCaseConfig.SWITCHYARD_XML)
+public class HelloServiceTest {
+	@ServiceOperation("HelloService")
+	private Invoker service;
+	@Test
+	public void testSayHello() throws Exception {
+		String message = "JUDCon 2012 China";
+		String result = service.operation("sayHello").sendInOut(message).getContent(String.class);
+		Assert.assertTrue("the result is: " + result, ("Hello " + message).equals(result));
+	}
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>SwitchYard In Action(3)</h2>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
+public final class HelloServiceTransformer {
+	@Transformer(to = "{urn:com.example.switchyard:judcon-china:0.0.1-SNAPSHOT}sayHelloResponse")
+	public Element transformStringToSayHelloResponse(String from) {
+		StringBuffer sbuffer = new StringBuffer();
+		sbuffer.append("&lt;sayHelloResponse xmlns=\"urn:com.example.switchyard:judcon-china:0.0.1-SNAPSHOT\"&gt;")
+		.append("&lt;string&gt;" + from + "&lt;/string&gt;").append("&lt;/sayHelloResponse&gt;");
+		return toElement(sbuffer.toString());
+	}
+	@Transformer(from = "{urn:com.example.switchyard:judcon-china:0.0.1-SNAPSHOT}sayHello")
+	public String transformSayHelloToString(Element from) {
+		return new String(getElementValue(from, "urn:string"));
+	}						
+}
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>SwitchYard In Action(4)</h2>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="xml">
+&lt;sca:composite name="judcon-china" targetNamespace="urn:com.example.switchyard:judcon-china:0.0.1-SNAPSHOT"&gt;
+&lt;sca:component name="HelloServiceBean"&gt;
+&lt;bean:implementation.bean class="com.example.switchyard.judcon_china.HelloServiceBean"/&gt;
+&lt;sca:service name="HelloService"&gt;
+&lt;sca:interface.java interface="com.example.switchyard.judcon_china.HelloService"/&gt;
+&lt;/sca:service&gt;
+&lt;/sca:component&gt;
+&lt;sca:service name="HelloServicePortType" promote="HelloServiceBean/HelloService"&gt;
+&lt;sca:interface.wsdl interface="HelloService.wsdl#wsdl.porttype(HelloServicePortType)"/&gt;
+&lt;soap:binding.soap&gt;
+&lt;soap:contextMapper/&gt;
+&lt;soap:wsdl&gt;HelloService.wsdl&lt;/soap:wsdl&gt;
+&lt;soap:wsdlPort&gt;HelloServicePort&lt;/soap:wsdlPort&gt;
+&lt;soap:contextPath&gt;judcon-china&lt;/soap:contextPath&gt;
+&lt;/soap:binding.soap&gt;
+&lt;/sca:service&gt;
+&lt;/sca:composite&gt;
+</code>
+</pre>
+</section>
+<section>
+<h2>SwitchYard In Action(5)</h2>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="xml">
+@RunWith(SwitchYardRunner.class)
+@SwitchYardTestCaseConfig(
+config = SwitchYardTestCaseConfig.SWITCHYARD_XML,
+scanners = {BeanSwitchYardScanner.class, TransformSwitchYardScanner.class},
+mixins = {CDIMixIn.class, HTTPMixIn.class})
+public class HelloServiceSoapTest {
+
+private HTTPMixIn httpMixIn;
+
+@Test
+public void testHelloService() throws Exception {
+httpMixIn.postResourceAndTestXML("http://localhost:8080/judcon-china/HelloService", "/soap-request.xml", "/soap-response.xml");
+}
+}
+</code></pre>
+</section>
+<section>
+<h2>SwitchYard In Action(6)</h2>
+<img src="images/monitor.png" />
+</section>  
+
+<section>
+<h2>What is next? </h2>
+<ul>
+<li>How can I use BPM service?</li>
+<li>How can I use the file binding?</li>
+<li>How can I use the camel service?</li>
+<li>How can I use the BPEL service with JMS?</li>
+</ul>
+
+
+<p> Check out the <a href="#">quickstarts</a>, it should give you answers to all of above, and much more!</p>
+</section>
+<section>
+<h2>Building a component in SwitchYard</h2>
+</section>
+<section>
+<h2>Project Repository</h2>
+<ul>
+using Git, and it is hosted at the <a href="http://github.com/jboss-switchyard">Github</a>
+<li>parents: (manages all dependencies and versions)</li>
+<li>core </li>
+<li>components </li>
+<li>quickstarts </li>
+<li>release</li>
+<li>tools</li>
+<li>console</li>
+<li>switchyard-openshift</li>
+</ul>
+</section>
+
+<section>
+<h2>outline of creating a component</h2>
+<ul>
+<li>defining an xsd (configuration) for your component </li>
+<li>implementing the Component and register it in SwitchYard</li>
+<li>implementing the Activator for the deployment </li>
+<li>implementing the serviceHandler (specifically, ExchangeHandler) for the message invocation</li>
+</ul>
+</section>
+
+<section>
+<h2>Component Registration</h2>
+<ul>
+<li>Implements the org.switchyard.deploy.Component interface (You should extend the BaseComponent)</li>
+<li>put your component full qualified name in the META-INF/services/org.switchyard.deploy.Component  file.</li>
+</ul>
+<pre><code>
+public interface Component {
+Activator createActivator(ServiceDomain domain);
+String getName();
+void init(Configuration config);
+void destroy();
+......
+}
+</code></pre>
+</section>
+<section>
+<h2>Creating your Activator</h2>
+<ul>
+<li>Implements the org.switchyard.deploy.Activator interface (you should extend the BaseActivator)</li>
+<li>implement methods accordingly, like implementing the Bindings or Service component</li>
+</ul>
+<pre><code>
+public interface Activator {
+ServiceHandler activateBinding(QName name, BindingModel config);
+void deactivateBinding(QName name, ServiceHandler handler);
+
+ServiceHandler activateService(QName name, ComponentModel config);
+void deactivateService(QName name, ServiceHandler handler);
+......
+}
+</code></pre>
+</section>
+<section>
+<h2>Creating your Service Handler</h2>
+<pre><code>
+/**
+* The role of a Handler is to handle messages and fault events during the
+* course of a service invocation...
+*/
+public interface ExchangeHandler {
+void handleMessage(Exchange exchange) throws HandlerException;
+void handleFault(Exchange exchange);
+}
+</code></pre>
+<pre><code>
+/**
+* Lifecycle-aware version of ExchangeHandler.  The deployer will invoke
+* start() and stop() in accordance with the deployment's lifecycle.
+*/
+public interface ServiceHandler extends ExchangeHandler {
+void start();
+void stop();   
+}
+</code></pre>						
+</section>
+
+<section>
+<h2>Your Component Model/Configuration </h2>
+<pre><code>
+&lt;sca:component name="SayHelloService"&gt;
+&lt;bpel:implementation.bpel process="sh:SayHello" /&gt;
+......
+</code></pre>
+<pre><code>
+&lt;schema targetNamespace="http://docs.oasis-open.org/ns/opencsa/sca/200903"
+xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified"&gt;
+
+&lt;!-- SCA-Assembly XML Schema --&gt;
+&lt;import namespace="http://docs.oasis-open.org/ns/opencsa/sca/200912"/&gt;
+
+<!-- SCA-BPEL Component Implementation Type -->
+&lt;element name="implementation.bpel"
+type="sca:BPELImplementation" substitutionGroup="sca:implementation" /&gt;
+
+....
+&lt;/schema&gt;
+</code></pre>
+</section>
+
+<section>
+<h2>Your Component Model/Configuration (2) </h2>
+<pre><code>
+public interface BPELComponentImplementationModel extends ComponentImplementationModel {
+.....
+}
+</code></pre>
+<pre><code>
+public class V1BPELComponentImplementationModel extends V1ComponentImplementationModel implements... {
+......
+}
+</code></pre>						
+</section>
+
+<section>
+<h2>Your Component Model/Configuration (3)</h2>
+<pre><code>
+public class V1BPELMarshaller extends V1CompositeMarshaller {
+/**
+* Reads in the Configuration, looking for "implementation.bpel".
+* If not found, it falls back to the super class (V1CompositeMarshaller).
+*/
+@Override
+public Model read(Configuration config) {
+String name = config.getName();
+if (IMPLEMENTATION_BPEL.equals(name)) {
+return new V1BPELComponentImplementationModel(config, getDescriptor());
+}
+return super.read(config);
+}	
+}
+</code></pre>						
+</section>
+
+<section>
+<h2>Your Component Model/Configuration (4)</h2>
+<ul>
+<li>creating the descriptor.properties with content like following in org.switchyard.config.model path</li>
+</ul>
+<pre><code>
+bpel1.namespace=http://docs.oasis-open.org/ns/opencsa/sca/200903
+bpel1.schema=bpel-v1.xsd
+bpel1.location=/org/switchyard/component/bpel/config/model/v1/
+bpel1.marshaller=org.switchyard.component.bpel.config.model.v1.V1BPELMarshaller
+</code></pre>
+</section>
+
+
+<section>
+<h2> project information</h2>
+<ul>
+<li>website: <a href="http://www.jboss.org/switchyard">http://www.jboss.org/switchyard</a></li>
+<li>user forum: <a href="https://community.jboss.org/en/switchyard?view=discussions">https://community.jboss.org/en/switchyard?view=discussions</a></li>
+<li>irc: freenode #switchyard channel</li>
+</ul>
+</section>
+
 				</section>
-
 				<section>
 					<section>
-						<h2>SQL!!</h2>
-						<h2>and NOSQL!!</h2>
-						<h2>and NewSQL!!</h2>
-						<h2>and ...?</h2>
+						<h1>THE END</h1>
+						<h3>BY Luan Cestari</h3>
 					</section>
 					<section>
-						<h2>SQL</h2>
-					</section>
-					<section>
-						<h2>NOSQL</h2>
-					</section>
-					<section>
-						<h2>Map of SQL and related</h2>
+						<h2>Questions</h2>
 					</section>
 				</section>
-
-				<!-- 
-				<section>
-					<h2>Test Up</h2>
-					<svg id="test1" class="mypiechart"></svg>
-
-				</section>
-				-->
-				<section>
-					<section>
-						<h2>Lambda Architecture</h2>
-					</section>
-					<section>
-						<h2>What usually happens (and goes wrong)</h2>
-					</section>
-					<section>
-						<h2>Go Wrong: A Solution that grown</h2>
-					</section>
-					<section>
-						<h2>Go Wrong: Wrong Tools/Technoliges</h2>
-						<aside class="notes">
-Harvard Business Review -> Mudança em um bank o processo batch de emprestimo (load) passou de 96 horas para 4. Ou de martketing q foi de 4.5h p 60 seconds; 2012 2.5 exabyte create a day (e dobra a cada 40 meses). Mais dados cruzam a internet a cada segundo de hj do que havia na internet inteira a 20 anos atras.
-						</aside>
-					</section>
-					<section>
-						<h2>What usually happens (and goes wrong)</h2>
-					</section>
-					<section>
-						<h2>Batch Layer</h2>
-					</section>
-					<section>
-						<h2>Service Layer</h2>
-					</section>
-					<section>
-						<h2>Speed Layer</h2>
-					</section>
-					<section>
-						<h2>Putting it all together!</h2>
-					</section>
-					<section>
-						<h2>Example using JBoss Tusk</h2>
-					</section>
-				</section>
-
-				<section>
-					<h1>THE END</h1>
-					<h3>BY Luan Cestari</h3>
-				</section>
-
 			</div>
-
 		</div>
 
 		<script src="javascripts/head.min.js"></script>
@@ -234,7 +573,7 @@ Harvard Business Review -> Mudança em um bank o processo batch de emprestimo (l
 				progress: true,
 				history: true,
 				center: true,
-				autoSlide: 30*1000,
+				autoSlide: 5 *60*1000,
 				theme: Reveal.getQueryHash().theme , // Sky Beige Simple Serif Night /css/theme
 				transition: Reveal.getQueryHash().transition || 'zoom', // default/cube/page/concave/zoom/linear/fade/none
 
