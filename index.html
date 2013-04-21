@@ -272,11 +272,10 @@ public interface HelloService {
 							<code contenteditable class="java">
 @Service(HelloService.class)
 public class HelloServiceBean implements HelloService {
-
 	@Override
 	public String sayHello(String name) {
-	System.out.println("Recieved name is: " + name);
-	return "Hello " + name;
+		System.out.println("Recieved name is: " + name);
+		return "Hello " + name;
 	}
 
 }
@@ -294,7 +293,7 @@ public class HelloServiceTest {
 	private Invoker service;
 	@Test
 	public void testSayHello() throws Exception {
-		String message = "JUDCon 2012 China";
+		String message = "JUDCon 2013 Brazil";
 		String result = service.operation("sayHello").sendInOut(message).getContent(String.class);
 		Assert.assertTrue("the result is: " + result, ("Hello " + message).equals(result));
 	}
@@ -307,14 +306,14 @@ public class HelloServiceTest {
 						<pre style="box-shadow:none;">
 							<code contenteditable class="java">
 public final class HelloServiceTransformer {
-	@Transformer(to = "{urn:com.example.switchyard:judcon-china:0.0.1-SNAPSHOT}sayHelloResponse")
+	@Transformer(to = "{urn:com.example.switchyard:judcon-brazil:0.0.1-SNAPSHOT}sayHelloResponse")
 	public Element transformStringToSayHelloResponse(String from) {
 		StringBuffer sbuffer = new StringBuffer();
-		sbuffer.append("&lt;sayHelloResponse xmlns=\"urn:com.example.switchyard:judcon-china:0.0.1-SNAPSHOT\"&gt;")
+		sbuffer.append("&lt;sayHelloResponse xmlns=\"urn:com.example.switchyard:judcon-brazil:0.0.1-SNAPSHOT\"&gt;")
 		.append("&lt;string&gt;" + from + "&lt;/string&gt;").append("&lt;/sayHelloResponse&gt;");
 		return toElement(sbuffer.toString());
 	}
-	@Transformer(from = "{urn:com.example.switchyard:judcon-china:0.0.1-SNAPSHOT}sayHello")
+	@Transformer(from = "{urn:com.example.switchyard:judcon-brazil:0.0.1-SNAPSHOT}sayHello")
 	public String transformSayHelloToString(Element from) {
 		return new String(getElementValue(from, "urn:string"));
 	}						
@@ -326,231 +325,237 @@ public final class HelloServiceTransformer {
 						<h2>SwitchYard In Action(4)</h2>
 						<pre style="box-shadow:none;">
 							<code contenteditable class="xml">
-&lt;sca:composite name="judcon-china" targetNamespace="urn:com.example.switchyard:judcon-china:0.0.1-SNAPSHOT"&gt;
-&lt;sca:component name="HelloServiceBean"&gt;
-&lt;bean:implementation.bean class="com.example.switchyard.judcon_china.HelloServiceBean"/&gt;
-&lt;sca:service name="HelloService"&gt;
-&lt;sca:interface.java interface="com.example.switchyard.judcon_china.HelloService"/&gt;
-&lt;/sca:service&gt;
-&lt;/sca:component&gt;
-&lt;sca:service name="HelloServicePortType" promote="HelloServiceBean/HelloService"&gt;
-&lt;sca:interface.wsdl interface="HelloService.wsdl#wsdl.porttype(HelloServicePortType)"/&gt;
-&lt;soap:binding.soap&gt;
-&lt;soap:contextMapper/&gt;
-&lt;soap:wsdl&gt;HelloService.wsdl&lt;/soap:wsdl&gt;
-&lt;soap:wsdlPort&gt;HelloServicePort&lt;/soap:wsdlPort&gt;
-&lt;soap:contextPath&gt;judcon-china&lt;/soap:contextPath&gt;
-&lt;/soap:binding.soap&gt;
-&lt;/sca:service&gt;
+&lt;sca:composite name="judcon-brazil" targetNamespace="urn:com.example.switchyard:judcon-china:0.0.1-SNAPSHOT"&gt;
+	&lt;sca:component name="HelloServiceBean"&gt;
+		&lt;bean:implementation.bean class="com.example.switchyard.judcon_brazil.HelloServiceBean"/&gt;
+		&lt;sca:service name="HelloService"&gt;
+			&lt;sca:interface.java interface="com.example.switchyard.judcon_brazil.HelloService"/&gt;
+		&lt;/sca:service&gt;
+	&lt;/sca:component&gt;
+	&lt;sca:service name="HelloServicePortType" promote="HelloServiceBean/HelloService"&gt;
+		&lt;sca:interface.wsdl interface="HelloService.wsdl#wsdl.porttype(HelloServicePortType)"/&gt;
+		&lt;soap:binding.soap&gt;
+			&lt;soap:contextMapper/&gt;
+			&lt;soap:wsdl&gt;HelloService.wsdl&lt;/soap:wsdl&gt;
+			&lt;soap:wsdlPort&gt;HelloServicePort&lt;/soap:wsdlPort&gt;
+			&lt;soap:contextPath&gt;judcon-brazil&lt;/soap:contextPath&gt;
+		&lt;/soap:binding.soap&gt;
+	&lt;/sca:service&gt;
 &lt;/sca:composite&gt;
-</code>
-</pre>
-</section>
-<section>
-<h2>SwitchYard In Action(5)</h2>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>SwitchYard In Action(5)</h2>
 						<pre style="box-shadow:none;">
-							<code contenteditable class="xml">
+							<code contenteditable class="java">
 @RunWith(SwitchYardRunner.class)
 @SwitchYardTestCaseConfig(
 config = SwitchYardTestCaseConfig.SWITCHYARD_XML,
 scanners = {BeanSwitchYardScanner.class, TransformSwitchYardScanner.class},
 mixins = {CDIMixIn.class, HTTPMixIn.class})
 public class HelloServiceSoapTest {
-
-private HTTPMixIn httpMixIn;
-
-@Test
-public void testHelloService() throws Exception {
-httpMixIn.postResourceAndTestXML("http://localhost:8080/judcon-china/HelloService", "/soap-request.xml", "/soap-response.xml");
+	private HTTPMixIn httpMixIn;
+	@Test
+	public void testHelloService() throws Exception {
+		httpMixIn.postResourceAndTestXML("http://localhost:8080/judcon-brazil/HelloService", "/soap-request.xml", "/soap-response.xml");
+	}
 }
-}
-</code></pre>
-</section>
-<section>
-<h2>SwitchYard In Action(6)</h2>
-<img src="images/monitor.png" />
-</section>  
-
-<section>
-<h2>What is next? </h2>
-<ul>
-<li>How can I use BPM service?</li>
-<li>How can I use the file binding?</li>
-<li>How can I use the camel service?</li>
-<li>How can I use the BPEL service with JMS?</li>
-</ul>
-
-
-<p> Check out the <a href="#">quickstarts</a>, it should give you answers to all of above, and much more!</p>
-</section>
-<section>
-<h2>Building a component in SwitchYard</h2>
-</section>
-<section>
-<h2>Project Repository</h2>
-<ul>
-using Git, and it is hosted at the <a href="http://github.com/jboss-switchyard">Github</a>
-<li>parents: (manages all dependencies and versions)</li>
-<li>core </li>
-<li>components </li>
-<li>quickstarts </li>
-<li>release</li>
-<li>tools</li>
-<li>console</li>
-<li>switchyard-openshift</li>
-</ul>
-</section>
-
-<section>
-<h2>outline of creating a component</h2>
-<ul>
-<li>defining an xsd (configuration) for your component </li>
-<li>implementing the Component and register it in SwitchYard</li>
-<li>implementing the Activator for the deployment </li>
-<li>implementing the serviceHandler (specifically, ExchangeHandler) for the message invocation</li>
-</ul>
-</section>
-
-<section>
-<h2>Component Registration</h2>
-<ul>
-<li>Implements the org.switchyard.deploy.Component interface (You should extend the BaseComponent)</li>
-<li>put your component full qualified name in the META-INF/services/org.switchyard.deploy.Component  file.</li>
-</ul>
-<pre><code>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>SwitchYard In Action(6)</h2>
+						<img src="images/monitor.png" />
+					</section>  
+					<section>
+						<h2>What is next? </h2>
+						<ul>
+							<li>How can I use BPM service?</li>
+							<li>How can I use the file binding?</li>
+							<li>How can I use the camel service?</li>
+							<li>How can I use the BPEL service with JMS?</li>
+						</ul>
+						<p>
+							Check out the <a href="#">quickstarts</a>, it should give you answers to all of above, and much more!
+						</p>
+					</section>
+					<section>
+						<h2>Building a component in SwitchYard</h2>
+					</section>
+					<section>
+						<h2>Project Repository</h2>
+						<p>
+							Hosted at the <a href="http://github.com/jboss-switchyard">Github</a> witht his structure:
+						</p>
+						<ul>
+							<li>parents (manages all dependencies and versions)</li>
+							<li>core </li>
+							<li>components </li>
+							<li>quickstarts </li>
+							<li>release</li>
+							<li>tools</li>
+							<li>console</li>
+							<li>switchyard-openshift</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Outline of creating a component</h2>
+						<ul>
+							<li>Defining an xsd (configuration) for your component </li>
+							<li>Implementing the Component and register it in SwitchYard</li>
+							<li>Implementing the Activator for the deployment </li>
+							<li>Implementing the serviceHandler (specifically, ExchangeHandler) for the message invocation</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Component Registration</h2>
+						<ul>
+							<li>Implements the org.switchyard.deploy.Component interface (You should extend the BaseComponent)</li>
+							<li>Put your component full qualified name in the META-INF/services/org.switchyard.deploy.Component  file.</li>
+						</ul>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
 public interface Component {
-Activator createActivator(ServiceDomain domain);
-String getName();
-void init(Configuration config);
-void destroy();
-......
+	Activator createActivator(ServiceDomain domain);
+	String getName();
+	void init(Configuration config);
+	void destroy();
+	......
 }
-</code></pre>
-</section>
-<section>
-<h2>Creating your Activator</h2>
-<ul>
-<li>Implements the org.switchyard.deploy.Activator interface (you should extend the BaseActivator)</li>
-<li>implement methods accordingly, like implementing the Bindings or Service component</li>
-</ul>
-<pre><code>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Creating your Activator</h2>
+						<ul>
+							<li>Implements the org.switchyard.deploy.Activator interface (you should extend the BaseActivator)</li>
+							<li>Implements methods accordingly, like implementing the Bindings or Service component</li>
+						</ul>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
 public interface Activator {
-ServiceHandler activateBinding(QName name, BindingModel config);
-void deactivateBinding(QName name, ServiceHandler handler);
-
-ServiceHandler activateService(QName name, ComponentModel config);
-void deactivateService(QName name, ServiceHandler handler);
-......
+	ServiceHandler activateBinding(QName name, BindingModel config);
+	void deactivateBinding(QName name, ServiceHandler handler);
+	ServiceHandler activateService(QName name, ComponentModel config);
+	void deactivateService(QName name, ServiceHandler handler);
+	......
 }
-</code></pre>
-</section>
-<section>
-<h2>Creating your Service Handler</h2>
-<pre><code>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Creating your Service Handler</h2>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
 /**
 * The role of a Handler is to handle messages and fault events during the
 * course of a service invocation...
 */
 public interface ExchangeHandler {
-void handleMessage(Exchange exchange) throws HandlerException;
-void handleFault(Exchange exchange);
+	void handleMessage(Exchange exchange) throws HandlerException;
+	void handleFault(Exchange exchange);
 }
-</code></pre>
-<pre><code>
+							</code>
+						</pre>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
 /**
 * Lifecycle-aware version of ExchangeHandler.  The deployer will invoke
 * start() and stop() in accordance with the deployment's lifecycle.
 */
 public interface ServiceHandler extends ExchangeHandler {
-void start();
-void stop();   
+	void start();
+	void stop();   
 }
-</code></pre>						
-</section>
-
-<section>
-<h2>Your Component Model/Configuration </h2>
-<pre><code>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Your Component Model/Configuration </h2>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="xml">
 &lt;sca:component name="SayHelloService"&gt;
-&lt;bpel:implementation.bpel process="sh:SayHello" /&gt;
-......
-</code></pre>
-<pre><code>
+	&lt;bpel:implementation.bpel process="sh:SayHello" /&gt;
+	......
+							</code>
+						</pre>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="xml">
 &lt;schema targetNamespace="http://docs.oasis-open.org/ns/opencsa/sca/200903"
 xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 xmlns="http://www.w3.org/2001/XMLSchema"
 elementFormDefault="qualified"&gt;
-
-&lt;!-- SCA-Assembly XML Schema --&gt;
-&lt;import namespace="http://docs.oasis-open.org/ns/opencsa/sca/200912"/&gt;
-
-<!-- SCA-BPEL Component Implementation Type -->
-&lt;element name="implementation.bpel"
-type="sca:BPELImplementation" substitutionGroup="sca:implementation" /&gt;
-
-....
+	&lt;!-- SCA-Assembly XML Schema --&gt;
+	&lt;import namespace="http://docs.oasis-open.org/ns/opencsa/sca/200912"/&gt;
+	&lt;!-- SCA-BPEL Component Implementation Type --&gt;
+	&lt;element name="implementation.bpel" type="sca:BPELImplementation" substitutionGroup="sca:implementation" /&gt;
+	....
 &lt;/schema&gt;
-</code></pre>
-</section>
-
-<section>
-<h2>Your Component Model/Configuration (2) </h2>
-<pre><code>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Your Component Model/Configuration (2) </h2>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
 public interface BPELComponentImplementationModel extends ComponentImplementationModel {
-.....
+	.....
 }
-</code></pre>
-<pre><code>
+							</code>
+						</pre>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
 public class V1BPELComponentImplementationModel extends V1ComponentImplementationModel implements... {
-......
+	......
 }
-</code></pre>						
-</section>
-
-<section>
-<h2>Your Component Model/Configuration (3)</h2>
-<pre><code>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Your Component Model/Configuration (3)</h2>
+						<pre style="box-shadow:none;">
+							<code contenteditable class="java">
 public class V1BPELMarshaller extends V1CompositeMarshaller {
-/**
-* Reads in the Configuration, looking for "implementation.bpel".
-* If not found, it falls back to the super class (V1CompositeMarshaller).
-*/
-@Override
-public Model read(Configuration config) {
-String name = config.getName();
-if (IMPLEMENTATION_BPEL.equals(name)) {
-return new V1BPELComponentImplementationModel(config, getDescriptor());
+	/**
+	* Reads in the Configuration, looking for "implementation.bpel".
+	* If not found, it falls back to the super class (V1CompositeMarshaller).
+	*/
+	@Override
+	public Model read(Configuration config) {
+		String name = config.getName();
+		if (IMPLEMENTATION_BPEL.equals(name)) {
+			return new V1BPELComponentImplementationModel(config, getDescriptor());
+		}
+		return super.read(config);
+	}	
 }
-return super.read(config);
-}	
-}
-</code></pre>						
-</section>
-
-<section>
-<h2>Your Component Model/Configuration (4)</h2>
-<ul>
-<li>creating the descriptor.properties with content like following in org.switchyard.config.model path</li>
-</ul>
-<pre><code>
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Your Component Model/Configuration (4)</h2>
+						<ul>
+							<li>Creating the descriptor.properties with content like following in org.switchyard.config.model path</li>
+						</ul>
+						<pre style="box-shadow:none;">
+							<code contenteditable >
 bpel1.namespace=http://docs.oasis-open.org/ns/opencsa/sca/200903
 bpel1.schema=bpel-v1.xsd
 bpel1.location=/org/switchyard/component/bpel/config/model/v1/
 bpel1.marshaller=org.switchyard.component.bpel.config.model.v1.V1BPELMarshaller
-</code></pre>
-</section>
-
-
-<section>
-<h2> project information</h2>
-<ul>
-<li>website: <a href="http://www.jboss.org/switchyard">http://www.jboss.org/switchyard</a></li>
-<li>user forum: <a href="https://community.jboss.org/en/switchyard?view=discussions">https://community.jboss.org/en/switchyard?view=discussions</a></li>
-<li>irc: freenode #switchyard channel</li>
-</ul>
-</section>
-
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h2>Project information</h2>
+						<ul>
+							<li>Website: <a href="http://www.jboss.org/switchyard">http://www.jboss.org/switchyard</a></li>
+							<li>User forum: <a href="https://community.jboss.org/en/switchyard?view=discussions">https://community.jboss.org/en/switchyard?view=discussions</a></li>
+							<li>IRC: #switchyard in freenode</li>
+						</ul>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -601,7 +606,7 @@ bpel1.marshaller=org.switchyard.component.bpel.config.model.v1.V1BPELMarshaller
 			<a href="https://twitter.com/BR_LuanCestari" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @BR_LuanCestari</a>
 		</div>
 
-		<a class="fork-reveal" style="display: none;" href="https://github.com/luan-cestari/judcon2013_switch"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/camo.github.com/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
+		<a class="fork-reveal" style="display: none;" href="https://github.com/luan-cestari/judcon2013_switch/tree/gh-pages"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/camo.github.com/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
 
 <script>
 /* <![CDATA[ */
