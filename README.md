@@ -8,3 +8,5 @@ The presentation is in the gh-pages branch (default branch used by github to you
 https://github.com/luan-cestari/judcon2013_switch/tree/gh-pages
 
 http://luan-cestari.github.io/judcon2013_switch?print-pdf
+
+http://superseniordevelopers.blogspot.com.br/
